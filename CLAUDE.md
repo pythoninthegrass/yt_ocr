@@ -16,7 +16,7 @@ This is a YouTube OCR tool that extracts social media usernames from images usin
 - **Dual OCR approach**: Uses both Pytesseract and EasyOCR for better accuracy
 - **GPU acceleration**: EasyOCR optimized with MPS/CUDA for performance
 - **Username filtering**: Regex patterns exclude email addresses and common TLDs (.com, .org, .net, .edu, .gov, .mil, .int, .biz, .info, .name)
-- **Output format**: Saves extracted usernames to `extracted_usernames.txt`
+- **Output format**: Saves extracted usernames to `extracted_usernames.csv` with headers: username,url,channel
 
 ## Performance Configuration
 
@@ -40,7 +40,7 @@ This is a YouTube OCR tool that extracts social media usernames from images usin
 
 ## Testing Requirements
 
-When testing main.py, ensure the generated txt file contains only canonical usernames starting with `@` without internal field separators (e.g., @AYEON, @albertatech). No email addresses or TLD patterns should be included.
+When testing main.py, ensure the generated CSV file contains only canonical usernames starting with `@` without internal field separators (e.g., @AYEON, @albertatech). No email addresses or TLD patterns should be included.
 
 ## Linting
 

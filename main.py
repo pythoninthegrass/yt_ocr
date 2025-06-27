@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import csv
 import easyocr
 import platform
 import pytesseract
@@ -16,7 +17,7 @@ try:
 except ImportError:
     TORCH_AVAILABLE = False
 
-file_name = config("FILE_NAME", default="extracted_usernames.txt")
+file_name = config("FILE_NAME", default="extracted_usernames.csv")
 
 # Suppress PyTorch MPS pin_memory warning on macOS
 warnings.filterwarnings("ignore", message=".*pin_memory.*not supported on MPS.*")
@@ -230,9 +231,14 @@ def main():
         for username in all_results:
             print(f"  {username}")
 
-        # Save to file
-        with open(file_name, 'w') as f:
-            f.write('\n'.join(all_results))
+        # Save to CSV file
+        with open(file_name, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            # Write header
+            writer.writerow(['username', 'url', 'channel'])
+            # Write usernames with empty url and channel fields for now
+            for username in all_results:
+                writer.writerow([username, '', ''])
         print(f"\nResults saved to '{file_name}'")
     else:
         print("No usernames found in the image.")
